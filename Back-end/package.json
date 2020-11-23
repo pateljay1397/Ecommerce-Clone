@@ -1,0 +1,29 @@
+{
+  "name": "back-end",
+  "version": "1.0.0",
+  "description": "This is backend of ecommerce Amazone clone project",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon ./src/index.server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "ecommerce",
+    "mern",
+    "project",
+    "backend",
+    "api.",
+    "api\u001b[D\u001b[D\u001b[D\u001b[",
+    "\u001b[3~\u001b[3~\u001b[3~\u001b[3~\u001b[B\u001b[D\u001b[B\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C"
+  ],
+  "author": "Jay Patel",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "express-validator": "^6.6.1",
+    "mongoose": "^5.10.15",
+    "nodemon": "^2.0.6"
+  }
+}
