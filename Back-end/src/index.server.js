@@ -5,7 +5,7 @@ const app = express();
 const mongoose = require("mongoose");
 
 //routes
-const userRoutes = require("./routes/user");
+const authRoutes = require("./routes/auth");
 
 //environment variable or you can say constants
 env.config();
@@ -18,17 +18,17 @@ mongoose
     {
       useNewUrlParser: true,
       useUnifiedTopology: true,
-      useCreateIndex: true
+      useCreateIndex: true,
     }
   )
   .then(() => {
     console.log("Databse connected");
   });
 
-app.use(bodyParser.urlencoded());
+app.use(express.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-app.use("/api", userRoutes);
+app.use("/api",authRoutes);
 
 app.listen(process.env.PORT, () => {
   console.log(`Server is running on port ${process.env.PORT}`);
