@@ -26,6 +26,8 @@
     "express-validator": "^6.7.0",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.10.15",
-    "nodemon": "^2.0.6"
+    "nodemon": "^2.0.6",
+    "slug": "^4.0.2",
+    "slugify": "^1.4.6"
   }
 }
