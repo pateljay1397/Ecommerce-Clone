@@ -27,8 +27,8 @@ const Signup = (props) => {
     dispatch(signup(user));
   };
 
-  if (user.loading === true) {
-    return <p>Loading...!</p>;
+  if (user.loading) {
+    return <Redirect to="/" />;
   }
   if (auth.authenticate) {
     return <Redirect to="/" />;
