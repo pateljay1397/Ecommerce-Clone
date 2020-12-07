@@ -14,6 +14,23 @@ export default (state = initState, action) => {
         categories: action.payload.categories,
       };
       break;
+    case categoryConstants.ADD_NEW_CATEGORY_REQUEST:
+      state = {
+        ...state,
+        loading: false,
+      };
+      break;
+    case categoryConstants.ADD_NEW_CATEGORY_SUCESS:
+      state = {
+        ...state,
+        loading: false,
+      };
+      break;
+    case categoryConstants.ADD_NEW_CATEGORY_FAILURE:
+      state = {
+        ...initState,
+      };
+      break;
   }
   return state;
 };
