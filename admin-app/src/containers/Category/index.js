@@ -21,6 +21,7 @@ const Category = (props) => {
     dispatch(getAllCategory());
   }, []);
   //we added empty array for the component did mount check
+  
   const handleClose = () => {
     const form = new FormData();
 
