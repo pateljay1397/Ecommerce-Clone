@@ -3,7 +3,7 @@ import { Col, Container, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import Layout from "../../components/Layout";
 import Input from "../../components/UI/Input";
-import NewModal from "../../components/UI/Modal";
+import Modal from "../../components/UI/Modal";
 import {
   addCategory,
   getAllCategory,
@@ -33,8 +33,8 @@ const Category = (props) => {
     //   categoryImage,
     // };
     setShow(false);
-    setCategoryName(" ");
-    setParentCategoryId(" ");
+    setCategoryName("");
+    setParentCategoryId("");
   };
   const handleShow = () => setShow(true);
 
@@ -89,7 +89,7 @@ const Category = (props) => {
         </Row>
       </Container>
 
-      <NewModal
+      <Modal
         show={show}
         handleClose={handleClose}
         modalTitle={"Add New Category"}
@@ -116,7 +116,7 @@ const Category = (props) => {
           name="categoryImage"
           onChange={handleCategoryImage}
         />
-      </NewModal>
+      </Modal>
     </Layout>
   );
 };

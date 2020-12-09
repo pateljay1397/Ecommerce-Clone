@@ -28,7 +28,7 @@ exports.initialData = async (req, res) => {
     .exec();
   //category should consider as foreign key
   res.status(200).json({
-    categorie: createCategorie(categories),
+    categories: createCategories(categories),
     products,
   });
 };
