@@ -75,7 +75,7 @@ const Products = (props) => {
                   <td>{product.name}</td>
                   <td>{product.price}</td>
                   <td>{product.quantity}</td>
-                  <td>{product.category}</td>
+                  <td>--</td>
                 </tr>
               ))
             : null}
@@ -177,7 +177,7 @@ const Products = (props) => {
           </Col>
           <Col md="6">
             <label className="key">Category</label>
-            <p className="value">{productDetails.category}</p>
+            <p className="value">--</p>
           </Col>
         </Row>
         <Row>

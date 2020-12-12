@@ -6,3 +6,7 @@ export const categoryConstants = {
   ADD_NEW_CATEGORY_SUCESS: "ADD_NEW_CATEGORY_SUCESS",
   ADD_NEW_CATEGORY_FAILURE: "ADD_NEW_CATEGORY_FAILURE",
 };
+
+export const productConstants = {
+  GET_PRODUCTS_BY_SLUG_REQUEST: "GET_PRODUCTS_BY_SLUG_REQUEST"
+};
