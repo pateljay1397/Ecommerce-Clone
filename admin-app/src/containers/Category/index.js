@@ -7,6 +7,7 @@ import Modal from "../../components/UI/Modal";
 import {
   addCategory,
   getAllCategory,
+  updateCategories,
 } from "../../redux/actions/category.action";
 import CheckboxTree from "react-checkbox-tree";
 import {
@@ -124,80 +125,35 @@ const Category = (props) => {
     }
   };
 
-  return (
-    <Layout sidebar>
-      <Container>
-        <Row>
-          <Col md={12}>
-            <div style={{ display: "flex", justifyContent: "space-between" }}>
-              <h3>Category</h3>
-              <button onClick={handleShow}> Add</button>
-            </div>
-          </Col>
-        </Row>
-        <Row>
-          <Col md={12}>
-            {/* <ul>
-              {renderCategories(category.categories)}
-             </ul>*/}
-            <CheckboxTree
-              nodes={renderCategories(category.categories)}
-              checked={checked}
-              expanded={expanded}
-              onCheck={(checked) => setChecked(checked)}
-              onExpand={(expanded) => setExpanded(expanded)}
-              icons={{
-                check: <IoIosCheckbox />,
-                uncheck: <IoIosCheckboxOutline />,
-                halfCheck: <IoIosCheckboxOutline />,
-                expandClose: <IoIosArrowForward />,
-                expandOpen: <IoIosArrowDown />,
-              }}
-            />
-          </Col>
-        </Row>
-        <Row>
-          <Col>
-            <button>Delete</button>
-            <button onClick={updateCategory}>Edit</button>
-          </Col>
-        </Row>
-      </Container>
-      {/* add category*/}
-      <Modal
-        show={show}
-        handleClose={handleClose}
-        modalTitle={"Add New Category"}
-      >
-        <Input
-          value={categoryName}
-          placeholder={`Category Name`}
-          onChange={(e) => setCategoryName(e.target.value)}
-        />
-        <select
-          className="form-control"
-          value={parentCategoryId}
-          onChange={(e) => setParentCategoryId(e.target.value)}
-        >
-          <option>Select Category</option>
-          {createCategoryList(category.categories).map((option) => (
-            <option key={option.value} value={option.value}>
-              {option.name}{" "}
-            </option>
-          ))}
-        </select>
-        <input
-          type="file"
-          name="categoryImage"
-          onChange={handleCategoryImage}
-        />
-      </Modal>
-      {/* Edit categories*/}
+  const updateCategoriesForm = () => {
+    const form = new FormData();
+    expandedArray.forEach((item, index) => {
+      form.append("_id", item.value);
+      form.append("name", item.name);
+      form.append("parentId", item.parentId ? item.parentId : "");
+      form.append("type", item.type);
+    });
+
+    checkedArray.forEach((item, index) => {
+      form.append("_id", item.value);
+      form.append("name", item.name);
+      form.append("parentId", item.parentId ? item.parentId : "");
+      form.append("type", item.type);
+    });
+
+    dispatch(updateCategories(form)).then((result) => {
+      if (result) {
+        dispatch(getAllCategory());
+      }
+    });
+    setUpdateCategoryModal(false);
+  };
+
+  const renderUpdatedCategoriesModal = () => {
+    return (
       <Modal
         show={updateCategoryModal}
-        handleClose={() => {
-          setUpdateCategoryModal(false);
-        }}
+        handleClose={updateCategoriesForm}
         modalTitle={"Update Categories"}
         size="lg"
       >
@@ -311,6 +267,85 @@ const Category = (props) => {
           onChange={handleCategoryImage}
         />
       </Modal>
+    );
+  };
+
+  const renderAddCategoryModal = () => {
+    return (
+      <Modal
+        show={show}
+        handleClose={handleClose}
+        modalTitle={"Add New Category"}
+      >
+        <Input
+          value={categoryName}
+          placeholder={`Category Name`}
+          onChange={(e) => setCategoryName(e.target.value)}
+        />
+        <select
+          className="form-control"
+          value={parentCategoryId}
+          onChange={(e) => setParentCategoryId(e.target.value)}
+        >
+          <option>Select Category</option>
+          {createCategoryList(category.categories).map((option) => (
+            <option key={option.value} value={option.value}>
+              {option.name}{" "}
+            </option>
+          ))}
+        </select>
+        <input
+          type="file"
+          name="categoryImage"
+          onChange={handleCategoryImage}
+        />
+      </Modal>
+    );
+  };
+
+  return (
+    <Layout sidebar>
+      <Container>
+        <Row>
+          <Col md={12}>
+            <div style={{ display: "flex", justifyContent: "space-between" }}>
+              <h3>Category</h3>
+              <button onClick={handleShow}> Add</button>
+            </div>
+          </Col>
+        </Row>
+        <Row>
+          <Col md={12}>
+            {/* <ul>
+              {renderCategories(category.categories)}
+             </ul>*/}
+            <CheckboxTree
+              nodes={renderCategories(category.categories)}
+              checked={checked}
+              expanded={expanded}
+              onCheck={(checked) => setChecked(checked)}
+              onExpand={(expanded) => setExpanded(expanded)}
+              icons={{
+                check: <IoIosCheckbox />,
+                uncheck: <IoIosCheckboxOutline />,
+                halfCheck: <IoIosCheckboxOutline />,
+                expandClose: <IoIosArrowForward />,
+                expandOpen: <IoIosArrowDown />,
+              }}
+            />
+          </Col>
+        </Row>
+        <Row>
+          <Col>
+            <button>Delete</button>
+            <button onClick={updateCategory}>Edit</button>
+          </Col>
+        </Row>
+      </Container>
+      {/* add category*/}
+      {renderAddCategoryModal()}
+      {/* Edit categories*/}
+      {renderUpdatedCategoriesModal()}
     </Layout>
   );
 };
