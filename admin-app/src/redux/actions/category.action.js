@@ -5,7 +5,7 @@ export const getAllCategory = () => {
   return async (dispatch) => {
     dispatch({ type: categoryConstants.GET_ALL_CATEGORIES_REQUEST });
     const res = await axios.get(`/category/getcategory`);
-    //console.log(res);
+    console.log("Called");
     if (res.status === 200) {
       const { categoryList } = res.data;
       dispatch({
@@ -44,7 +44,6 @@ export const updateCategories = (form) => {
     const res = await axios.post(`/category/update`, form);
     if (res.status === 201) {
       return true;
-      console.log(res);
     } else {
       console.log(res);
     }

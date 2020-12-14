@@ -8,7 +8,7 @@ import {
   addCategory,
   getAllCategory,
   updateCategories,
-} from "../../redux/actions/category.action";
+} from "../../redux/actions";
 import CheckboxTree from "react-checkbox-tree";
 import {
   IoIosCheckboxOutline,
@@ -29,6 +29,7 @@ const Category = (props) => {
   const [checkedArray, setCheckedArray] = useState([]);
   const [expandedArray, setExpandedArray] = useState([]);
   const [updateCategoryModal, setUpdateCategoryModal] = useState(false);
+  const [deleteCategoryModal, setDeleteCategoryModal] = useState(false);
   const dispatch = useDispatch();
   //console.log(category.categories);
 
@@ -303,6 +304,18 @@ const Category = (props) => {
     );
   };
 
+  const renderDeleteCategoryModal = () => {
+    return (
+      <Modal
+        modalTitle="Confirm"
+        show={deleteCategoryModal}
+        handleClose={() => setDeleteCategoryModal(false)}
+      >
+        Are you sure
+      </Modal>
+    );
+  };
+
   return (
     <Layout sidebar>
       <Container>
@@ -337,7 +350,7 @@ const Category = (props) => {
         </Row>
         <Row>
           <Col>
-            <button>Delete</button>
+            <button onClick={() => setDeleteCategoryModal(true)}>Delete</button>
             <button onClick={updateCategory}>Edit</button>
           </Col>
         </Row>
@@ -346,6 +359,8 @@ const Category = (props) => {
       {renderAddCategoryModal()}
       {/* Edit categories*/}
       {renderUpdatedCategoriesModal()}
+      {/*Delete Category*/}
+      {renderDeleteCategoryModal()}
     </Layout>
   );
 };
