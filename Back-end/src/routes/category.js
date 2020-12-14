@@ -6,6 +6,7 @@ const {
   addCategory,
   getCategories,
   updateCategories,
+  deleteCategories,
 } = require("../controller/category");
 const { requireSignin, adminMiddleware } = require("../common-middleware");
 
@@ -38,4 +39,6 @@ router.post(
   upload.array("categoryImage"),
   updateCategories
 );
+router.post("/category/delete", deleteCategories);
+
 module.exports = router;
