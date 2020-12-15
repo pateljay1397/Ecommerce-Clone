@@ -101,9 +101,9 @@ exports.deleteCategories = async (req, res) => {
     deletedCategories.push(deleteCategory);
   }
 
-  if (this.deletedCategories.length == ids.length) {
+  if (deletedCategories.length == ids.length) {
     res.status(201).json({ message: "Categories removed" });
   } else {
-    res.status(500).json({ message: "Something went wrong" });
+    res.status(400).json({ message: "Something went wrong" });
   }
 };

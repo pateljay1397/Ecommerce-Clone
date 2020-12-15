@@ -44,7 +44,7 @@ exports.addItemToCart = (req, res) => {
       });
 
       cart.save((Error, cart) => {
-        if (Error) return res.status(500).json({ Error });
+        if (Error) return res.status(400).json({ Error });
         if (cart) {
           return res.status(200).json({ cart });
         }
