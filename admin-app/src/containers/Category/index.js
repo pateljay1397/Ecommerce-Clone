@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import Layout from "../../components/Layout";
-import Input from "../../components/UI/Input";
-import Modal from "../../components/UI/Modal";
+//import Input from "../../components/UI/Input";
+//import Modal from "../../components/UI/Modal";
 import {
   addCategory,
   getAllCategory,
@@ -20,6 +20,7 @@ import {
 import "react-checkbox-tree/lib/react-checkbox-tree.css";
 import UpdateCategoriesModal from "./component/UpdateCategoriesModal";
 import AddCategoryModal from "./component/AddCategoryModal";
+import DeleteCategoryModal from "./component/DeleteCategoryModal";
 
 const Category = (props) => {
   const category = useSelector((state) => state.category);
@@ -181,41 +182,6 @@ const Category = (props) => {
     }
   };
 
-  const renderDeleteCategoryModal = () => {
-    return (
-      <Modal
-        modalTitle="Confirm"
-        show={deleteCategoryModal}
-        handleClose={() => setDeleteCategoryModal(false)}
-        buttons={[
-          {
-            label: "No",
-            color: "primary",
-            onClick: () => {
-              alert("no");
-            },
-          },
-          {
-            label: "Yes",
-            color: "danger",
-            onClick: () => {
-              deleteCategories();
-            },
-          },
-        ]}
-      >
-        <h5>Expanded</h5>
-        {expandedArray.map((item, index) => (
-          <span key={index}>{item.name}</span>
-        ))}
-        <h5>Checked</h5>
-        {checkedArray.map((item, index) => (
-          <span key={index}>{item.name}</span>
-        ))}
-      </Modal>
-    );
-  };
-
   const categoryList = createCategoryList(category.categories);
 
   return (
@@ -281,9 +247,17 @@ const Category = (props) => {
         handleCategoryInput={handleCategoryInput}
         categoryList={categoryList}
       />
+      <DeleteCategoryModal
+        show={deleteCategoryModal}
+        handleClose={() => setDeleteCategoryModal(false)}
+        modalTitle={"Delete Categories"}
+        size="lg"
+        expandedArray={expandedArray}
+        checkedArray={checkedArray}
+        deleteCategories={deleteCategories}
+      />
       {/*renderUpdatedCategoriesModal()*/}
       {/*Delete Category*/}
-      {renderDeleteCategoryModal()}
     </Layout>
   );
 };
