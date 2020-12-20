@@ -154,11 +154,7 @@ const Category = (props) => {
       form.append("type", item.type);
     });
 
-    dispatch(updateCategories(form)).then((result) => {
-      if (result) {
-        dispatch(getAllCategory());
-      }
-    });
+    dispatch(updateCategories(form));
     setUpdateCategoryModal(false);
   };
 
@@ -196,7 +192,7 @@ const Category = (props) => {
             <div style={{ display: "flex", justifyContent: "space-between" }}>
               <h3>Category</h3>
               <div className="actionBtnContainer">
-                <span>Actions</span>
+                <span>Actions:</span>
                 <button onClick={handleShow}>
                   {" "}
                   <IoIosAdd /> <span>Add</span>
