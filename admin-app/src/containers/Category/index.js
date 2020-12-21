@@ -43,8 +43,19 @@ const Category = (props) => {
 
   //we added empty array for the component did mount check
 
+  useEffect(() => {
+    if (!category.loading) {
+      setShow(false);
+    }
+  }, [category.loading]);
+
   const handleClose = () => {
     const form = new FormData();
+    if (categoryName === "") {
+      alert("Category name is required");
+      setShow(false);
+      return;
+    }
 
     form.append("name", categoryName);
     form.append("parentId", parentCategoryId);
@@ -156,7 +167,8 @@ const Category = (props) => {
     });
 
     dispatch(updateCategories(form));
-    setUpdateCategoryModal(false);
+
+    setDeleteCategoryModal(false);
   };
 
   const deleteCategory = () => {
@@ -234,7 +246,8 @@ const Category = (props) => {
       {/* add category*/}
       <AddCategoryModal
         show={show}
-        handleClose={handleClose}
+        handleClose={() => setShow(false)}
+        onSubmit={handleClose}
         modalTitle={"Add New Category"}
         categoryName={categoryName}
         setCategoryName={setCategoryName}
@@ -247,7 +260,8 @@ const Category = (props) => {
       {/* Edit categories*/}
       <UpdateCategoriesModal
         show={updateCategoryModal}
-        handleClose={updateCategoriesForm}
+        handleClose={() => setUpdateCategoryModal(false)}
+        onSubmit={updateCategoriesForm}
         modalTitle={"Update Categories"}
         size="lg"
         expandedArray={expandedArray}

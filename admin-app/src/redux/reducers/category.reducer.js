@@ -81,6 +81,8 @@ export default (state = initState, action) => {
     case categoryConstants.ADD_NEW_CATEGORY_FAILURE:
       state = {
         ...initState,
+        loading: false,
+        error: action.payload.error,
       };
       break;
     case categoryConstants.UPDATE_CATEGORIES_REQUEST:
@@ -101,6 +103,7 @@ export default (state = initState, action) => {
         error: action.payload.error,
         loading: false,
       };
+      break;
     case categoryConstants.DELETE_CATEGORIES_REQUEST:
       state = {
         ...state,
