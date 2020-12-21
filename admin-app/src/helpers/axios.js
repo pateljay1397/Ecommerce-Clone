@@ -25,9 +25,9 @@ axoisInstance.interceptors.response.use(
   },
   (error) => {
     console.log(error.response);
-    const { status } = error.response;
+    const status = error.response.status;
     // You can update the Back-end code for the status
-    if (status === 500) {
+    if (status && status === 500) {
       localStorage.clear();
       store.dispatch({ type: authConstants.LOGOUT_SUCESS });
     }
