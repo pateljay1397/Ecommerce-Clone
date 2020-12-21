@@ -81,6 +81,7 @@ const Category = (props) => {
         value: category._id,
         name: category.name,
         parentId: category.parentId,
+        type: category.type,
       });
       if (category.children.length > 0) {
         createCategoryList(category.children, options);
@@ -180,6 +181,7 @@ const Category = (props) => {
         }
       });
     }
+    setDeleteCategoryModal(false);
   };
 
   const categoryList = createCategoryList(category.categories);
