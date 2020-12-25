@@ -1,6 +1,6 @@
 const Product = require("../models/product");
 const shortid = require("shortid");
-const { slugify } = require("slugify");
+const slugify = require("slugify");
 const Category = require("../models/category");
 //const category = require("../models/category");
 
@@ -30,19 +30,21 @@ exports.createProduct = (req, res) => {
   product.save((Error, product) => {
     if (Error) return res.status(400).json({ Error });
     if (product) {
-      res.status(200).json({ product });
+      res.status(201).json({ product, files: req.files });
     }
   });
 };
 
 exports.getProductsBySlug = (req, res) => {
   const { slug } = req.params;
+  console.log("slug", slug);
   Category.findOne({ slug: slug })
-    .select("_id")
+    .select("_id type")
     .exec((error, category) => {
       if (error) {
         return res.status(400).json({ error });
       }
+      console("category Details: ", category);
       if (category) {
         Product.find({ category: category._id }).exec((error, products) => {
           if (error) {

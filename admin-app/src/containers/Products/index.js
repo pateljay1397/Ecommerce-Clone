@@ -23,6 +23,10 @@ const Products = (props) => {
   const dispatch = useDispatch();
 
   const handleClose = () => {
+    setShow(false);
+  };
+
+  const submitProductForm = () => {
     const form = new FormData();
     form.append("name", name);
     form.append("quantity", quantity);
@@ -33,8 +37,7 @@ const Products = (props) => {
       form.append("productPicture", pic);
     }
     console.log(form);
-    dispatch(addProduct(form));
-    setShow(false);
+    dispatch(addProduct(form)).then(() => setShow(false));
   };
   const handleShow = () => setShow(true);
 
@@ -75,7 +78,7 @@ const Products = (props) => {
                   <td>{product.name}</td>
                   <td>{product.price}</td>
                   <td>{product.quantity}</td>
-                  <td>--</td>
+                  <td>{product.category.name}</td>
                 </tr>
               ))
             : null}
@@ -91,6 +94,7 @@ const Products = (props) => {
         show={show}
         handleClose={handleClose}
         modalTitle={"Add New Product"}
+        onSubmit={submitProductForm}
       >
         <Input
           label="Name"
@@ -177,7 +181,7 @@ const Products = (props) => {
           </Col>
           <Col md="6">
             <label className="key">Category</label>
-            <p className="value">--</p>
+            <p className="value">{productDetails.category.name}</p>
           </Col>
         </Row>
         <Row>
