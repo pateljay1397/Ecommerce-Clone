@@ -168,7 +168,7 @@ const Category = (props) => {
 
     dispatch(updateCategories(form));
 
-    setDeleteCategoryModal(false);
+    setUpdateCategoryModal(false);
   };
 
   const deleteCategory = () => {
