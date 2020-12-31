@@ -3,7 +3,11 @@ const Category = require("../models/category");
 const router = express.Router();
 //const { addCategory, getCategories } = require("../controller/category");
 const { requireSignin, adminMiddleware } = require("../common-middleware");
-const { createProduct, getProductsBySlug } = require("../controller/product");
+const {
+  createProduct,
+  getProductsBySlug,
+  getProductDetailsById,
+} = require("../controller/product");
 const multer = require("multer");
 const shortid = require("shortid");
 const path = require("path");
@@ -29,4 +33,5 @@ router.post(
 );
 router.get("/products/:slug", getProductsBySlug);
 //router.get("/category/getcategory", getCategories);
+router.get("/product/:productId", getProductDetailsById);
 module.exports = router;
