@@ -38,14 +38,14 @@ exports.createProduct = (req, res) => {
 
 exports.getProductsBySlug = (req, res) => {
   const { slug } = req.params;
-  console.log("slug", slug);
+  // console.log("slug", slug);
   Category.findOne({ slug: slug })
     .select("_id type")
     .exec((error, category) => {
       if (error) {
         return res.status(400).json({ error });
       }
-      console("category Details: ", category);
+      //console("category Details: ", category);
       if (category) {
         Product.find({ category: category._id }).exec((error, products) => {
           if (error) {
