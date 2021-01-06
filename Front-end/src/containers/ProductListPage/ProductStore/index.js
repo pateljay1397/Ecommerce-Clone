@@ -4,6 +4,7 @@ import { getProductsBySlug } from "../../../redux/actions";
 import "./style.css";
 import { generatePublicUrl } from "../../../urlConfig";
 import { Link } from "react-router-dom";
+import Card from "../../../components/UI/Card";
 
 const ProductStore = (props) => {
   const product = useSelector((state) => state.product);
@@ -24,13 +25,11 @@ const ProductStore = (props) => {
     <>
       {Object.keys(product.productsByPrice).map((key, index) => {
         return (
-          <div className="card">
-            <div className="cardHeader">
-              <div>
-                {props.match.params.slug} mobile under CAD ${priceRange[key]}{" "}
-              </div>
-              <button>View all</button>
-            </div>
+          <Card
+            headerLeft={`${props.match.params.slug} mobile under CAD ${priceRange[key]}`}
+            headerRight={<button>View all</button>}
+            style={{ width: "calc(100% - 40px)", margin: "20px" }}
+          >
             <div style={{ display: "flex" }}>
               {product.productsByPrice[key].map((product) => (
                 <Link
@@ -59,7 +58,7 @@ const ProductStore = (props) => {
                 </Link>
               ))}
             </div>
-          </div>
+          </Card>
         );
       })}{" "}
     </>
