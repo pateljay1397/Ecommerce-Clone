@@ -42,6 +42,7 @@ export const addToCart = (product, newQty = 1) => {
     };
 
     if (auth.authenticate) {
+      console.log("Action Called");
       dispatch({ type: cartConstants.ADD_TO_CART_REQUEST });
       const payload = {
         // cartItems: Object.keys(cartItems).map((key, index) => {
@@ -57,9 +58,9 @@ export const addToCart = (product, newQty = 1) => {
           },
         ],
       };
-      //      console.log(payload);
+      console.log("Payload", payload);
       const res = await axios.post(`/user/cart/addtocart`, payload);
-      //     console.log(res);
+      console.log("res", res);
       if (res.status === 201) {
         dispatch(getCartItems());
       }

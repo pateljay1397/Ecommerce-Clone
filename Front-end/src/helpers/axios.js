@@ -11,6 +11,7 @@ const axiosInstance = axios.create({
   },
 });
 
+console.log("Axios Called");
 axiosInstance.interceptors.request.use((req) => {
   const { auth } = store.getState();
   if (auth.token) {

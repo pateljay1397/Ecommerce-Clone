@@ -9,18 +9,17 @@ function runUpdate(condition, updateData) {
 }
 
 exports.addItemToCart = (req, res) => {
+  console.log("Request", req);
   Cart.findOne({ user: req.user._id }).exec((Error, cart) => {
     if (Error) return res.status(400).json({ Error });
     if (cart) {
       //If cart already exist then update cart by quantity
       //res.status(200).json({ message: cart });
       let promiseArray = [];
-      req.body.cartItems.forEach((cartItems) => {
-        const product = cartItems.product;
+      req.body.cartItems.forEach((cartItem) => {
+        const product = cartItem.product;
         const item = cart.cartItems.find((c) => c.product == product);
-
         let condition, update;
-
         if (item) {
           condition = { user: req.user._id, "cartItems.product": product };
           update = {
@@ -52,13 +51,13 @@ exports.addItemToCart = (req, res) => {
       //If cart not exist then create new cart
       const cart = new Cart({
         user: req.user._id,
-        cartItems: [req.body.cartItems],
+        cartItems: req.body.cartItems,
       });
 
-      cart.save((Error, cart) => {
-        if (Error) return res.status(400).json({ Error });
+      cart.save((error, cart) => {
+        if (error) return res.status(400).json({ error });
         if (cart) {
-          return res.status(200).json({ cart });
+          return res.status(201).json({ cart });
         }
       });
     }
