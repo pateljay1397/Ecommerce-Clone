@@ -23,7 +23,7 @@ env.config();
 //mongodb+srv://<username>:<password>@cluster0.bnlm5.mongodb.net/<dbname>?retryWrites=true&w=majority
 mongoose
   .connect(
-    `mongodb+srv://${process.env.MONGO_DB_USER}:${process.env.MONGO_DB_PASSWORD}@cluster0.bnlm5.mongodb.net/${process.env.MONGO_DB_DATABASE}?retryWrites=true&w=majority`,
+    `mongodb+srv://${process.env.MONGO_DB_USER}:${process.env.MONGO_DB_PASSWORD}@ecommerce.qigq2l3.mongodb.net/`,
     {
       useNewUrlParser: true,
       useUnifiedTopology: true,
