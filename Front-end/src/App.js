@@ -1,6 +1,6 @@
 import "./App.css";
 import HomePage from "./containers/HomePage";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import ProductListPage from "./containers/ProductListPage";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -9,7 +9,7 @@ import ProductDetailsPage from "./containers/ProductDetailsPage";
 import CartPage from "./containers/CartPage";
 import CheckoutPage from "./containers/CheckoutPage";
 
-function App() {
+const App = () => {
   const dispatch = useDispatch();
   const auth = useSelector((state) => state.auth);
   useEffect(() => {
@@ -25,19 +25,19 @@ function App() {
   return (
     <div className="App">
       <Router>
-        <Switch>
-          <Route path="/" exact component={HomePage} />
-          <Route path="/cart" component={CartPage} />
-          <Route path="/Checkout" component={CheckoutPage} />
+        <Routes>
+          <Route path="/" exact element={<HomePage />} />
+          <Route path="/cart" element={<CartPage />} />
+          <Route path="/Checkout" element={<CheckoutPage />} />
           <Route
             path="/:productSlug/:productId/p"
-            component={ProductDetailsPage}
+            element={<ProductDetailsPage />}
           />
-          <Route path="/:slug" component={ProductListPage} />
-        </Switch>
+          <Route path="/:slug" element={<ProductListPage />} />
+        </Routes>
       </Router>
     </div>
   );
-}
+};
 
 export default App;
