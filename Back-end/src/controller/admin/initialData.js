@@ -25,7 +25,9 @@ function createCategories(categories, parentId = null) {
 exports.initialData = async (req, res) => {
   const categories = await Category.find({}).exec();
   const products = await Product.find({})
-    .select("_id name price quantity description productPictures category")
+    .select(
+      "_id name price quantity description productPictures categoryID categoryName"
+    )
     .populate({ path: "category", select: "_id name" })
     .exec();
   //category should consider as foreign key
