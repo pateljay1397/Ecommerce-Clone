@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import { NavLink } from "react-router-dom";
 import Header from "../Header";
@@ -6,7 +6,7 @@ import "./style.css";
 
 const Layout = (props) => {
   return (
-    <>
+    <Fragment>
       <Header />
       {props.sidebar ? (
         <Container fluid>
@@ -15,21 +15,20 @@ const Layout = (props) => {
               <ul>
                 <li>
                   <NavLink exact to={`/`}>
-                    {" "}
                     Home
-                  </NavLink>{" "}
+                  </NavLink>
                 </li>
                 <li>
-                  <NavLink to={`/page`}> Page</NavLink>{" "}
+                  <NavLink to={`/page`}> Page</NavLink>
                 </li>
                 <li>
-                  <NavLink to={`/category`}> Category</NavLink>{" "}
+                  <NavLink to={`/category`}> Category</NavLink>
                 </li>
                 <li>
-                  <NavLink to={`/products`}>Products</NavLink>{" "}
+                  <NavLink to={`/products`}>Products</NavLink>
                 </li>
                 <li>
-                  <NavLink to={`/orders`}>Orders</NavLink>{" "}
+                  <NavLink to={`/orders`}>Orders</NavLink>
                 </li>
               </ul>
             </Col>
@@ -41,7 +40,7 @@ const Layout = (props) => {
       ) : (
         props.children
       )}
-    </>
+    </Fragment>
   );
 };
 

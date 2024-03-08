@@ -11,11 +11,12 @@ const ProductPage = (props) => {
   const product = useSelector((state) => state.product);
   const { page } = product;
   useEffect(() => {
-    const params = getParams(props.location.search);
+    const params = getParams(props?.location?.search);
     const payload = {
       params,
     };
     dispatch(getProductPage(payload));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (
     <div style={{ margin: "0 10px" }}>

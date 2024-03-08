@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import { Row, Col, Container } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import Layout from "../../components/Layout";
@@ -181,10 +181,10 @@ const NewPage = (props) => {
       {page.loading ? (
         <p>Creating Page...please wait for a moment</p>
       ) : (
-        <>
+        <Fragment>
           {renderCreatePageModal()}
           <button onClick={() => setCreateModal(true)}>Create Page</button>
-        </>
+        </Fragment>
       )}
     </Layout>
   );

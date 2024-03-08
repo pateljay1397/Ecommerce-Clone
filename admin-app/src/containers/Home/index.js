@@ -1,19 +1,20 @@
 import React from "react";
-import { Col, Container, Jumbotron, Row } from "react-bootstrap";
-import { NavLink } from "react-router-dom";
+import { Container, Row } from "react-bootstrap";
+// import { NavLink } from "react-router-dom";
 import Layout from "../../components/Layout";
 import "./style.css";
 
-const Home = (props) => {
+const Home = () => {
   return (
     <Layout sidebar>
-      
-      {/*<Jumbotron
+      <Container
         style={{ margin: "5rem", background: "#fff" }}
         className="text-center"
       >
-        <h1>Welcome to Admin Dashboard</h1>
-      </Jumbotron> */}
+        <Row>
+          <h1>Welcome to Admin Dashboard</h1>
+        </Row>
+      </Container>
     </Layout>
   );
 };

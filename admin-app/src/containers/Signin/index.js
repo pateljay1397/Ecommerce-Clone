@@ -1,15 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Button, Row, Col, Container, Form } from "react-bootstrap";
 import Layout from "../../components/Layout";
 import Input from "../../components/UI/Input";
 import { login } from "../../redux/actions";
 import { useDispatch, useSelector } from "react-redux";
-import { Redirect } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 
-const Signin = (props) => {
+const Signin = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
+  // const [error, setError] = useState("");
   const auth = useSelector((state) => state.auth);
   const dispatch = useDispatch();
 
@@ -23,7 +23,7 @@ const Signin = (props) => {
   };
 
   if (auth.authenticate) {
-    return <Redirect to="/" />;
+    return <Navigate to="/" />;
   }
 
   return (

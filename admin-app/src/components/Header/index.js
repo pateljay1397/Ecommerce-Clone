@@ -1,10 +1,10 @@
 import React from "react";
-import { Nav, Navbar, NavDropdown, Container } from "react-bootstrap";
+import { Nav, Navbar, Container } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, NavLink } from "react-router-dom";
 import { signout } from "../../redux/actions";
 
-const Header = (props) => {
+const Header = () => {
   const auth = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   const logout = () => {
@@ -22,18 +22,17 @@ const Header = (props) => {
       </Nav>
     );
   };
-
   const renderNonLoggedInLinks = () => {
     return (
       <Nav>
         {/*<Nav.Link href="#deets">Signin</Nav.Link>*/}
         <li className="nav-item">
-          <NavLink to="signin" className="nav-link">
+          <NavLink to="/signin" className="nav-link">
             Signin
           </NavLink>
         </li>
         <li className="nav-item">
-          <NavLink to="signup" className="nav-link">
+          <NavLink to="/signup" className="nav-link">
             Signup
           </NavLink>
         </li>

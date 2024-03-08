@@ -4,18 +4,24 @@ import getParams from "../../utils/getParams";
 import ProductPage from "./ProductPage";
 import ProductStore from "./ProductStore";
 import "./style.css";
+import { useLocation } from "react-router-dom";
+// import queryString from "query-string";
 
 const ProductListPage = (props) => {
+  const location = useLocation();
+  // const queryParams = queryString.parse(location.search);
+
   const renderProduct = () => {
-    console.log(props);
-    const params = getParams(props.location.search);
+    console.log("ProductList props", props);
+    const params = getParams(location.search);
+    console.log("Params", params);
     let content = null;
     switch (params.type) {
       case "store":
         content = <ProductStore {...props} />;
         break;
       case "page":
-        content = <ProductPage {...props} />;
+        content = <ProductPage {...params} />;
         break;
       default:
         content = null;
