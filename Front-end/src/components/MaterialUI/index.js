@@ -1,17 +1,12 @@
-import React, { useState } from "react";
+import React, { Fragment, useState } from "react";
 import "./style.css";
-
-/**
- * @author Rizwan Khan
- * @function
- **/
 
 const Modal = (props) => {
   if (!props.visible) {
     return null;
   }
   return (
-    <>
+    <Fragment>
       <div className="modalFixedBg">
         <div style={{ position: "relative" }}>
           <div className="modalClose" onClick={props.onClose}>
@@ -20,7 +15,7 @@ const Modal = (props) => {
           <div className="modalContainer">{props.children}</div>
         </div>
       </div>
-    </>
+    </Fragment>
   );
 };
 

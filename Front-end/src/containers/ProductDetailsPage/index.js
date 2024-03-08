@@ -33,7 +33,7 @@ const ProductDetailsPage = (props) => {
         <div className="flexRow">
           <div className="verticalImageStack">
             {product.productDetails.productPictures.map((thumb, index) => (
-              <div className="thumbnail">
+              <div key={index} className="thumbnail">
                 <img src={generatePublicUrl(thumb.img)} alt={thumb.img} />
               </div>
             ))}

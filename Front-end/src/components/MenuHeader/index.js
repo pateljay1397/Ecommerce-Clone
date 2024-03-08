@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getAllCategory } from "../../redux/actions";
 import "./style.css";
 
-const MenuHeader = (props) => {
+const MenuHeader = () => {
   const category = useSelector((state) => state.category);
   const dispatch = useDispatch();
   useEffect(() => {

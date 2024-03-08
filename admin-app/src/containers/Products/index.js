@@ -8,12 +8,15 @@ import Modal from "../../components/UI/Modal";
 import { generatePublicUrl } from "../../urlConfig";
 import "./style.css";
 
-const Products = (props) => {
+const Products = () => {
   const [name, setName] = useState("");
   const [quantity, setQuantity] = useState("");
   const [price, setPrice] = useState("");
   const [description, setDescription] = useState("");
-  const [categoryId, setCategoryId] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState({
+    categoryId: "",
+    categoryName: "",
+  });
   const [productPictures, setProductPictures] = useState([]);
   const [show, setShow] = useState(false);
   const [productDetailModal, setProductDetailModal] = useState(false);
@@ -32,11 +35,12 @@ const Products = (props) => {
     form.append("quantity", quantity);
     form.append("price", price);
     form.append("description", description);
-    form.append("category", categoryId);
+    form.append("categoryId", selectedCategory.categoryId);
+    form.append("categoryName", selectedCategory.categoryName);
     for (let pic of productPictures) {
       form.append("productPicture", pic);
     }
-    console.log(form);
+    console.log("Final Form data", form.entries());
     dispatch(addProduct(form)).then(() => setShow(false));
   };
   const handleShow = () => setShow(true);
@@ -56,6 +60,7 @@ const Products = (props) => {
   };
 
   const renderProducts = () => {
+    console.log("Product Data ", product);
     return (
       <Table style={{ fontSize: 12 }} responsive="sm">
         <thead>
@@ -64,27 +69,39 @@ const Products = (props) => {
             <th>Name</th>
             <th>Price</th>
             <th>Quantity</th>
-            <th>Category</th>
+            <th>CategoryName</th>
           </tr>
         </thead>
         <tbody>
-          {product.products.length > 0
-            ? product.products.map((product) => (
-                <tr
-                  onClick={() => showProductDetailsModal(product)}
-                  key={product._id}
-                >
-                  <td>2</td>
-                  <td>{product.name}</td>
-                  <td>{product.price}</td>
-                  <td>{product.quantity}</td>
-                  <td>{product.category.name}</td>
-                </tr>
-              ))
-            : null}
+          {product.products.length > 0 ? (
+            product.products.map((product) => (
+              <tr
+                onClick={() => showProductDetailsModal(product)}
+                key={product._id}
+              >
+                <td>2</td>
+                <td>{product.name}</td>
+                <td>{product.price}</td>
+                <td>{product.quantity}</td>
+                <td>{product.categoryName}</td>
+              </tr>
+            ))
+          ) : (
+            <h1>{"No component to render"}</h1>
+          )}
         </tbody>
       </Table>
     );
+  };
+
+  const handleCategoryChange = (e) => {
+    const selectedCategoryId = e.target.value;
+    const selectedCategoryName = e.target.options[e.target.selectedIndex].text;
+
+    setSelectedCategory({
+      categoryId: selectedCategoryId,
+      categoryName: selectedCategoryName,
+    });
   };
 
   //console.log(productPictures);
@@ -122,13 +139,13 @@ const Products = (props) => {
         />
         <select
           className="form-control"
-          value={categoryId}
-          onChange={(e) => setCategoryId(e.target.value)}
+          value={selectedCategory.categoryId}
+          onChange={handleCategoryChange}
         >
-          <option>Select Category</option>
+          <option value="">Select Category</option>
           {createCategoryList(category.categories).map((option) => (
             <option key={option.value} value={option.value}>
-              {option.name}{" "}
+              {option.name}
             </option>
           ))}
         </select>
@@ -195,7 +212,7 @@ const Products = (props) => {
             <label className="key">Product Pictures :</label>
             <div style={{ display: "flex" }}>
               {productDetails.productPictures.map((picture) => (
-                <div className="productImgContainer">
+                <div className="productImgContainer" key={picture._id}>
                   <img src={generatePublicUrl(picture.img)} />
                 </div>
               ))}

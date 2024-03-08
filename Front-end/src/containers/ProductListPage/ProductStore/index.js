@@ -5,6 +5,7 @@ import "./style.css";
 import { generatePublicUrl } from "../../../urlConfig";
 import { Link } from "react-router-dom";
 import Card from "../../../components/UI/Card";
+import { Fragment } from "react";
 
 const ProductStore = (props) => {
   const product = useSelector((state) => state.product);
@@ -19,16 +20,18 @@ const ProductStore = (props) => {
   useEffect(() => {
     const { match } = props;
     dispatch(getProductsBySlug(match.params.slug));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
-    <>
+    <Fragment>
       {Object.keys(product.productsByPrice).map((key, index) => {
         return (
           <Card
             headerLeft={`${props.match.params.slug} mobile under CAD ${priceRange[key]}`}
             headerRight={<button>View all</button>}
             style={{ width: "calc(100% - 40px)", margin: "20px" }}
+            key={index}
           >
             <div style={{ display: "flex" }}>
               {product.productsByPrice[key].map((product) => (
@@ -61,7 +64,7 @@ const ProductStore = (props) => {
           </Card>
         );
       })}{" "}
-    </>
+    </Fragment>
   );
 };
 

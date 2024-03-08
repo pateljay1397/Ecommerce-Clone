@@ -1,6 +1,7 @@
 import React from "react";
-import { Redirect, Route } from "react-router-dom";
+import { Navigate, Route } from "react-router-dom";
 
+// eslint-disable-next-line react/prop-types
 const PrivateRoute = ({ component: Component, ...rest }) => {
   return (
     <Route
@@ -10,7 +11,7 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
         if (token) {
           return <Component {...props} />;
         } else {
-          return <Redirect to={"/signin"} />;
+          return <Navigate to={"/signin"} />;
         }
       }}
     />

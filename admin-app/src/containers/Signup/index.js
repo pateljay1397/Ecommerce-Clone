@@ -1,17 +1,17 @@
 import React, { useState } from "react";
 import { Button, Row, Col, Container, Form } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { Redirect } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 import Layout from "../../components/Layout";
 import Input from "../../components/UI/Input";
 import { signup } from "../../redux/actions";
 
-const Signup = (props) => {
+const Signup = () => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
+  // const [error, setError] = useState("");
   const auth = useSelector((state) => state.auth);
   const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
@@ -28,10 +28,10 @@ const Signup = (props) => {
   };
 
   if (user.loading) {
-    return <Redirect to="/" />;
+    return <Navigate to="/" />;
   }
   if (auth.authenticate) {
-    return <Redirect to="/" />;
+    return <Navigate to="/" />;
   }
 
   return (

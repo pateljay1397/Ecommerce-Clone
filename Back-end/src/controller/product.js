@@ -7,7 +7,15 @@ const product = require("../models/product");
 
 exports.createProduct = (req, res) => {
   //  res.status(200).json({ file: req.files, body: req.body });
-  const { name, price, description, category, quantity, createdBy } = req.body;
+  const {
+    name,
+    price,
+    description,
+    categoryId,
+    categoryName,
+    quantity,
+    createdBy,
+  } = req.body;
 
   let productPictures = [];
 
@@ -24,7 +32,8 @@ exports.createProduct = (req, res) => {
     quantity,
     description,
     productPictures,
-    category,
+    categoryId,
+    categoryName,
     createdBy: req.user._id,
   });
 
@@ -45,7 +54,6 @@ exports.getProductsBySlug = (req, res) => {
       if (error) {
         return res.status(400).json({ error });
       }
-      //console("category Details: ", category);
       if (category) {
         Product.find({ category: category._id }).exec((error, products) => {
           if (error) {
